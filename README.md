@@ -35,8 +35,6 @@
 BlinkRAG/
 ├── backend/       # Django backend
 ├── frontend/      # Vite + React frontend
-├── chromadb/      # Local vector DB scripts
-├── sample_docs/   # Example documents
 └── README.md
 ```
 

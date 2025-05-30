@@ -1,19 +1,19 @@
 # ✨ **BlinkRAG – Document Intelligence RAG App**
 
-> 🧠 **BlinkRAG** is a full-stack app to upload documents, chunk & embed them into a vector DB, and ask natural language questions – answered in real-time by Gemini 2.0 AI.
-> 💻 **Tech:** Django, Gemini 2.0, Vite + React, Tailwind CSS.
-> ✨ **Style:** Clean. Minimal UI
+> - 🧠 **BlinkRAG** is a full-stack app to upload documents, chunk & embed them into a vector DB, and ask natural language questions – answered in real-time by Gemini 2.0 AI.
+> - 💻 **Tech:** Django, Gemini 2.0, Vite + React, Tailwind CSS.
+> - ✨ **Style:** Clean. Minimal UI
 
 ---
 
 ## 🚀 **Features**
 
-✅ Upload `.txt` files
-✅ Auto-chunk & embed with **Sentence Transformers**
-✅ **ChromaDB** for fast semantic search
-✅ Gemini 2.0 Flash answers 🔥
-✅ Chat-like Q\&A interface
-✅ Responsive design – looks fab on mobile too! 📱
+- ✅ Upload `.txt` files
+- ✅ Auto-chunk & embed with **Sentence Transformers**
+- ✅ **ChromaDB** for fast semantic search
+- ✅ Gemini 2.0 Flash answers 🔥
+- ✅ Chat-like Q\&A interface
+- ✅ Responsive design – looks fab on mobile too! 📱
 
 ---
 
@@ -78,16 +78,16 @@ npm run dev
 
 ## 🔑 **Setup Tips**
 
-✅ **CORS**: Set `CORS_ALLOW_ALL_ORIGINS=True` in Django
-✅ **API Key**: Add your `GEMINI_API_KEY` in `.env`
+- ✅ **CORS**: Set `CORS_ALLOW_ALL_ORIGINS=True` in Django
+- ✅ **API Key**: Add your `GEMINI_API_KEY` in `.env`
 
 ---
 
 ## 💡 **Why BlinkRAG?**
 
-Because Gen Z wants answers fast ⚡.
-Because your doc insights shouldn’t gather dust 📚.
-Because AI is better when it’s conversational. 🎤
+- Because Gen Z wants answers fast ⚡.
+- Because your doc insights shouldn’t gather dust 📚.
+- Because AI is better when it’s conversational. 🎤
 
 ---
 <p align="center">Made with ❤️ by Soumil Shamak 😎</p>

@@ -1,19 +1,19 @@
 # ✨ **BlinkRAG – Document Intelligence RAG App**
 
-> 🧠 **BlinkRAG** is a full-stack app to upload documents, chunk & embed them into a vector DB, and ask natural language questions – answered in real-time by Gemini 2.0 AI.
-> 💻 **Tech:** Django, ChromaDB, Gemini 2.0, Vite + React, Tailwind CSS.
-> ✨ **Style:** Clean. Minimal UI
+> - 🧠 **BlinkRAG** is a full-stack app to upload documents, chunk & embed them into a vector DB, and ask natural language questions – answered in real-time by Gemini 2.0 AI.
+> - 💻 **Tech:** Django, Gemini 2.0, Vite + React, Tailwind CSS.
+> - ✨ **Style:** Clean. Minimal UI
 
 ---
 
 ## 🚀 **Features**
 
-✅ Upload `.txt` files
-✅ Auto-chunk & embed with **Sentence Transformers**
-✅ **ChromaDB** for fast semantic search
-✅ Gemini 2.0 Flash answers 🔥
-✅ Chat-like Q\&A interface
-✅ Responsive design – looks fab on mobile too! 📱
+- ✅ Upload `.txt` files
+- ✅ Auto-chunk & embed with **Sentence Transformers**
+- ✅ **ChromaDB** for fast semantic search
+- ✅ Gemini 2.0 Flash answers 🔥
+- ✅ Chat-like Q\&A interface
+- ✅ Responsive design – looks fab on mobile too! 📱
 
 ---
 
@@ -21,7 +21,6 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" />
-  <img src="https://img.shields.io/badge/ChromaDB-00A36C?style=for-the-badge&logo=databricks&logoColor=white" />
   <img src="https://img.shields.io/badge/Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white" />
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white" />
@@ -79,17 +78,16 @@ npm run dev
 
 ## 🔑 **Setup Tips**
 
-✅ **CORS**: Set `CORS_ALLOW_ALL_ORIGINS=True` in Django
-✅ **API Key**: Add your `GEMINI_API_KEY` in `.env`
-✅ **Vector DB**: ChromaDB runs locally, blazing fast!
+- ✅ **CORS**: Set `CORS_ALLOW_ALL_ORIGINS=True` in Django
+- ✅ **API Key**: Add your `GEMINI_API_KEY` in `.env`
 
 ---
 
 ## 💡 **Why BlinkRAG?**
 
-Because Gen Z wants answers fast ⚡.
-Because your doc insights shouldn’t gather dust 📚.
-Because AI is better when it’s conversational. 🎤
+- Because Gen Z wants answers fast ⚡.
+- Because your doc insights shouldn’t gather dust 📚.
+- Because AI is better when it’s conversational. 🎤
 
 ---
 <p align="center">Made with ❤️ by Soumil Shamak 😎</p>

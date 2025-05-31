@@ -7,8 +7,8 @@ from chromadb.utils import embedding_functions
 # Load the sentence transformer model
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Create or connect to ChromaDB collection
-chroma_client = chromadb.Client()
+# persistent storage path
+chroma_client = chromadb.PersistentClient(path="chromadb_storage")
 collection = chroma_client.get_or_create_collection(name="document_chunks")
 
 def process_document(document: Document):
@@ -43,7 +43,7 @@ def process_document(document: Document):
             embeddings=[embedding],
             ids=[f"{document.id}_{idx}"],
             metadatas=[{"document_id": str(document.id)}]
-        )
+        ) 
 
         # Save embedding ID (optional)
         doc_chunk.embedding_id = f"{document.id}_{idx}"

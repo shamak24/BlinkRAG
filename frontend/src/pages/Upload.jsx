@@ -1,65 +1,105 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 
 const Upload = () => {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef();
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
 
   const handleUpload = async () => {
     if (!file) {
       setStatus("Please select a .txt file to upload.");
       return;
     }
-
-    // Create form data
+    setIsUploading(true);
+    setStatus("");
     const formData = new FormData();
     formData.append("file", file);
     if (title) formData.append("title", title);
 
     try {
       const response = await axios.post("http://localhost:8000/api/upload/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log(response.data);
       setStatus(`Uploaded successfully: ${response.data.title}`);
       setFile(null);
       setTitle("");
     } catch (error) {
-      console.error(error);
       setStatus("Upload failed. Please try again.");
+    } finally {
+      setIsUploading(false);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Upload Document</h1>
-
-      <input
-        type="text"
-        placeholder="Optional title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="w-full border border-gray-300 p-2 rounded mb-4"
-      />
-
-      <input
-        type="file"
-        accept=".txt"
-        onChange={(e) => setFile(e.target.files[0])}
-        className="mb-4"
-      />
-
-      <button
-        onClick={handleUpload}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Upload
-      </button>
-
-      {status && <p className="mt-4 text-gray-700">{status}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8">
+        <h1 className="text-3xl font-extrabold text-indigo-700 mb-6 text-center">Upload Document 📃</h1>
+        <div
+          className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-8 mb-6 transition-colors ${
+            file ? "border-indigo-500 bg-indigo-50" : "border-gray-300 bg-gray-50 hover:border-indigo-400"
+          }`}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={() => fileInputRef.current.click()}
+          style={{ cursor: "pointer" }}
+        >
+          <CloudArrowUpIcon className="h-12 w-12 text-indigo-400 mb-2" />
+          <p className="text-gray-700 mb-1">
+            {file ? (
+              <span className="font-semibold text-indigo-700">{file.name}</span>
+            ) : (
+              "Drag & drop your .txt file here, or click to select"
+            )}
+          </p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".txt"
+            className="hidden"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </div>
+        <input
+          type="text"
+          placeholder="Optional title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full border border-gray-300 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+        />
+        <button
+          onClick={handleUpload}
+          disabled={isUploading}
+          className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg shadow hover:bg-indigo-700 transition disabled:opacity-60"
+        >
+          {isUploading ? "Uploading..." : "Upload"}
+        </button>
+        {status && (
+          <div
+            className={`mt-5 text-center px-4 py-2 rounded-lg ${
+              status.startsWith("Uploaded")
+                ? "bg-green-50 text-green-700 border border-green-200"
+                : "bg-red-50 text-red-700 border border-red-200"
+            }`}
+          >
+            {status}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

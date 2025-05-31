@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// List of dashboard features to display
 const features = [
   {
     title: "Ask Questions",
@@ -21,18 +22,21 @@ const features = [
 ];
 
 const Dashboard = () => {
+  // State to hold fetched documents
   const [documents, setDocuments] = useState([]);
+  // State to manage loading indicator
   const [loading, setLoading] = useState(true);
 
+  // Fetch documents from backend API on component mount
   useEffect(() => {
     const fetchDocuments = async () => {
       try {
         const response = await axios.get("http://localhost:8000/api/documents/");
-        setDocuments(response.data);
+        setDocuments(response.data); // Update state with fetched documents
       } catch (err) {
         console.error("Failed to fetch documents:", err);
       } finally {
-        setLoading(false);
+        setLoading(false); // Hide loading indicator
       }
     };
 
@@ -42,6 +46,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-12 px-4 pt-24 flex flex-col">
       <div className="max-w-6xl mx-auto flex-1 w-full">
+        {/* Header section with title and upload button */}
         <div className="flex items-center justify-between mb-10">
           <h1 className="text-4xl font-extrabold text-blue-800 tracking-tight flex items-center gap-2">
             <span role="img" aria-label="books">📚</span>
@@ -55,13 +60,16 @@ const Dashboard = () => {
           </Link>
         </div>
 
+        {/* Main content area: document list or loading/empty state */}
         <div className="bg-white/80 rounded-2xl shadow-xl p-8">
           {loading ? (
+            // Loading spinner
             <div className="flex justify-center items-center h-40">
               <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></span>
               <span className="ml-4 text-blue-700 font-medium">Loading documents...</span>
             </div>
           ) : documents.length === 0 ? (
+            // Empty state if no documents
             <div className="text-center text-gray-500 py-16">
               <p className="text-lg">No documents uploaded yet.</p>
               <Link
@@ -72,6 +80,7 @@ const Dashboard = () => {
               </Link>
             </div>
           ) : (
+            // Render list of uploaded documents
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {documents.map((doc) => (
                 <div
@@ -79,7 +88,9 @@ const Dashboard = () => {
                   className="bg-gradient-to-br from-blue-100 via-white to-blue-200 border border-blue-200 rounded-xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform"
                 >
                   <div>
+                    {/* Document title */}
                     <h2 className="text-xl font-bold text-blue-800 mb-2 truncate">{doc.title}</h2>
+                    {/* Document metadata badges */}
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className="bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
                         {doc.file_type}
@@ -97,10 +108,12 @@ const Dashboard = () => {
                         {doc.processing_status}
                       </span>
                     </div>
+                    {/* Upload date */}
                     <p className="text-sm text-gray-500 mb-4">
                       Uploaded: {new Date(doc.created_at).toLocaleDateString()}
                     </p>
                   </div>
+                  {/* Link to ask questions about the document */}
                   <Link
                     to={`/ask/${doc.id}`}
                     className="mt-2 block w-full text-center bg-blue-700 text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors shadow"
